@@ -9,22 +9,22 @@ class CCamera
 		fl3 m_vUpVector;
 		fl3 m_vStrafe;
 	public:	
-		double kSpeed;
+		float kSpeed;
 		bool MouseFlag;
-        double Perspective;
+        float Perspective;
 
 		CCamera      ( );
 		fl3 Position ( ) { return m_vPosition;	}
 		fl3 View     ( ) { return m_vView;		}
 		fl3 UpVector ( ) { return m_vUpVector;	}
 		fl3 Strafe   ( ) { return m_vStrafe;	}
-		void PositionCamera (	double PositionX,	double PositionY,	double PositionZ,
-								double ViewX,		double ViewY,		double ViewZ,
-								double upVectorX,	double upVectorY,	double upVectorZ );
+		void PositionCamera (	float PositionX,	float PositionY,	float PositionZ,
+								float ViewX,		float ViewY,		float ViewZ,
+								float upVectorX,	float upVectorY,	float upVectorZ );
 
-		void StrafeCamera (	double speed );
-		void MoveCamera ( double speed );
-		void RotateView ( double angle, double x, double y, double z );
+		void StrafeCamera (	float speed );
+		void MoveCamera ( float speed );
+		void RotateView ( float angle, float x, float y, float z );
 		void Keyboard ( );
 		void Update ( int w, int h );
 		void Look ( );

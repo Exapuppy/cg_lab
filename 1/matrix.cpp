@@ -12,16 +12,16 @@ matrix::matrix()
 
 void matrix::operator*=(fl3 a)//scale
 {
-    m[0][0] = 1.0/a.m[0];
-    m[1][1] = 1.0/a.m[1];
-    m[2][2] = 1.0/a.m[2];
+    m[0][0] = 1.0f/a.m[0];
+    m[1][1] = 1.0f/a.m[1];
+    m[2][2] = 1.0f/a.m[2];
 
     type = SC;
 }
 
-void matrix::operator*=(double a)//scale
+void matrix::operator*=(float a)//scale
 {
-    m[0][0] = m[1][1] = m[2][2] = 1.0/a;
+    m[0][0] = m[1][1] = m[2][2] = 1.0f/a;
 
     type = SC;
 }
@@ -41,9 +41,9 @@ void matrix::operator&=(fl3 normal)//rotate
     if(normal & up)
         return;
     fl3 U = norm_ort(normal,up);
-    double c = (up*normal) / (norm(normal)),
+    float c = (up*normal) / (norm(normal)),
           s = sqrt(1-c*c);
-    double ux = U.m[0], uy = U.m[1], uz = U.m[2];
+    float ux = U.m[0], uy = U.m[1], uz = U.m[2];
 
     m[0][0] = (1-c)*ux*ux+c   ; m[0][1] = (1-c)*uy*ux-s*uz; m[0][2] = (1-c)*uz*ux-s*uy;
     m[0][0] = (1-c)*ux*uy+s*uz; m[0][1] = (1-c)*uy*uy+c   ; m[0][2] = (1-c)*uz*uy-s*ux;

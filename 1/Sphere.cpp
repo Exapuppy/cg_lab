@@ -28,10 +28,10 @@ CSphere::CSphere(float _r, fl3 _c): r(_r)
 void CSphere::create()
 {
     //for OGL drawing
-    float phi = 0, phi_end = 2*M_PI, d_phi = (2*M_PI / (float)VERTEX_NUM);
+    float phi = 0, phi_end = 2*(float)M_PI, d_phi = (2* (float)M_PI / (float)VERTEX_NUM);
     for(int i = 0; phi < phi_end && i < VERTEX_NUM; phi += d_phi, i++)
     {
-        float psi = 0, psi_end = M_PI, d_psi = (M_PI / (float)VERTEX_NUM);
+        float psi = 0, psi_end = (float)M_PI, d_psi = ((float)M_PI / (float)VERTEX_NUM);
         for(int j = 0; psi < psi_end && j < VERTEX_NUM; psi += d_psi, j++)
         {
             obj[i][j] = c + fl3(r*cos(phi)*sin(psi),
@@ -105,7 +105,7 @@ bool CSphere::trace(CRay ray, float& t)
 }
 void CSphere::calculatePointColor()
 {
-    SavedColor = fl3(0.,0.3,0.8);
+    SavedColor = fl3(0.0f,0.3f,0.8f);
 }
 void CSphere::calculateIntensity(vector<CLight> Lights)
 {
@@ -131,7 +131,7 @@ fl3 CSphere::calculateIntensity_Phong(fl3 a, fl3 d, fl3 s, fl3 LightPos)
     fl3 n = SavedNormal,
         cp = SavedPoint,
         S = normalize(LightPos - cp),
-        r = fl3_rotate(M_PI,n,S),
+        r = fl3_rotate((float)M_PI,n,S),
         v = normalize(TransferToCanonical(SavedEyeRay._1) - cp);
     return a + d*(n*S) + s*pow((r*v),LightCoef->F);
 }

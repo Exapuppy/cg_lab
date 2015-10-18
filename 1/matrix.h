@@ -4,13 +4,13 @@
 class matrix
 {
 public:
-    double m[3][4];
+    float m[3][4];
     
     enum TP{TR,SC,RT,NOT} type;
 
     void operator+=(fl3 a);     //translate
     void operator*=(fl3 a);     //scale
-    void operator*=(double a);   //scale
+    void operator*=(float a);   //scale
     void operator&=(fl3 normal);//rotate
     matrix();
 };

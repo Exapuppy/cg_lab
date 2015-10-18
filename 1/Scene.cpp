@@ -34,11 +34,11 @@ void CScene::RayTracing()
     fl3     Eye   = camera.Position();
     fl3     w     = normalize(camera.View() - camera.Position());
     float   theta = camera.Perspective;
-    int     nCols = pixelMatrix.width;
-    int     nRows = pixelMatrix.height;
+    uint     nCols = pixelMatrix.width;
+    uint     nRows = pixelMatrix.height;
     float   aspect = (float)nCols/(float)nRows;
     float   N     = 1;
-    float   H     = N*tan(theta*0.5);
+    float   H     = N*tan(theta*0.5f);
     float   W     = H*aspect;
     fl3     v     = norm_ort(camera.Strafe(),w);
     fl3     u     = camera.Strafe();

@@ -7,7 +7,7 @@ bool b_XYZ  = false;
 
 CScene scene;
 
-enum PLAY_MODE{PM_PAUSE,PM_PLAY} playMode = PM_PLAY;
+enum PLAY_MODE{PM_PAUSE,PM_PLAY} playMode = PLAY_MODE::PM_PLAY;
 
 void timf(int value)
 {

@@ -3,11 +3,11 @@
 #define CAMERA_POS  fl3(0.0,0.0,30.0)
 #define CAMERA_VIEW fl3(0.0,0.0,0.0)
 
-double g_FrameInterval = 40.0f;
+float g_FrameInterval = 40.0f;
 
 CCamera :: CCamera ( )
 {
-	kSpeed = 0.05;
+	kSpeed = 0.05f;
 	MouseFlag = false;
 	
 	/*m_vPosition = fl3 ( 0.0, 0.0, 50.0 );
@@ -38,19 +38,19 @@ void CCamera :: Mouse ()
 	int           mX = ( rt.left + rt.right ) >> 1;
 	int           mY = ( rt.top + rt.bottom ) >> 1;
 	
-	double         angleY = 0.0f;
-	double         angleZ = 0.0f;
-	static double  currentRotX = 0.0f;
+	float         angleY = 0.0f;
+	float         angleZ = 0.0f;
+	static float  currentRotX = 0.0f;
 
 	if ( ( mousePos.x == mX) && ( mousePos.y == mY ) )
 		return;
 
 	SetCursorPos ( mX, mY );
 
-	angleY = ( double ) ( ( mX - mousePos.x ) ) / 1000.0f;
-	angleZ = ( double ) ( ( mY - mousePos.y ) ) / 1000.0f;
+	angleY = ( float ) ( ( mX - mousePos.x ) ) / 1000.0f;
+	angleZ = ( float ) ( ( mY - mousePos.y ) ) / 1000.0f;
 
-	static double lastRotX = 0.0f;
+	static float lastRotX = 0.0f;
 	lastRotX = currentRotX;
 
 	if ( currentRotX > 1.0f )
@@ -76,13 +76,13 @@ void CCamera :: Mouse ()
 	}
 	RotateView ( angleY, 0, 1, 0 );
 }
-void CCamera :: RotateView ( double angle, double x, double y, double z )
+void CCamera :: RotateView ( float angle, float x, float y, float z )
 {
 	fl3 vNewView;
 	fl3 vView = m_vView - m_vPosition;
 	
-	double	cosTheta = ( double ) cos ( angle ),
-			sinTheta = ( double ) sin ( angle ),
+	float	cosTheta = ( float ) cos ( angle ),
+			sinTheta = ( float ) sin ( angle ),
 			_1_cosTh = 1 - cosTheta,
 			_1_cosTh_xy = _1_cosTh * x * y,
 			_1_cosTh_yz = _1_cosTh * z * y,
@@ -106,14 +106,14 @@ void CCamera :: RotateView ( double angle, double x, double y, double z )
 	m_vView = m_vPosition + vNewView;
 }
 
-void CCamera :: StrafeCamera ( double speed )
+void CCamera :: StrafeCamera ( float speed )
 {
 	m_vPosition.m[0] += m_vStrafe.m[0] * speed;
 	m_vPosition.m[2] += m_vStrafe.m[2] * speed;
 	m_vView.m[0] += m_vStrafe.m[0] * speed;
 	m_vView.m[2] += m_vStrafe.m[2] * speed;
 }
-void CCamera :: MoveCamera ( double speed )
+void CCamera :: MoveCamera ( float speed )
 {
 	fl3 vVector = normalize ( m_vView - m_vPosition ) * speed;
 	
@@ -143,7 +143,7 @@ void CCamera :: Keyboard ( )
 {
 	if(MouseFlag)
 	{
-		double speed = kSpeed * g_FrameInterval;
+		float speed = kSpeed * g_FrameInterval;
 		if ( ( GetKeyState ( VK_UP ) & 0x80 ) || ( GetKeyState ( 'W' ) & 0x80 ) )	 
 			MoveCamera ( speed );
 		if ( ( GetKeyState ( VK_DOWN ) & 0x80 ) || ( GetKeyState ( 'S' ) & 0x80 ) )	 
@@ -161,9 +161,9 @@ void CCamera :: Look ( )
 				m_vView.m[0],		m_vView.m[1],		m_vView.m[2],
 				m_vUpVector.m[0],	m_vUpVector.m[1],	m_vUpVector.m[2]);
 }
-GLvoid CCamera :: PositionCamera ( double PositionX, double PositionY, double PositionZ,
-							double ViewX, double ViewY, double ViewZ,
-							double upVectorX, double upVectorY, double upVectorZ )
+GLvoid CCamera :: PositionCamera ( float PositionX, float PositionY, float PositionZ,
+							float ViewX, float ViewY, float ViewZ,
+							float upVectorX, float upVectorY, float upVectorZ )
 {
 
 	m_vPosition = fl3(PositionX, PositionY, PositionZ);

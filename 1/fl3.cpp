@@ -9,46 +9,22 @@ fl3  operator -  (const fl3 a)
 	return fl3(-a.m[0],-a.m[1],-a.m[2]);
 }
 fl3  operator -  (const fl3 l, const fl3 r)		{ return l + (-r); }
-fl3  operator *  (const fl3 a, const double b)
-{
-	return fl3(b*a.m[0],b*a.m[1],b*a.m[2]);
-}
-fl3  operator *  (const fl3 a, const GLfloat b) { return a*(double)b; }
-fl3  operator *  (const double a, const fl3 b)  { return b*(double)a; }
-fl3  operator *  (const GLfloat a, const fl3 b) { return b*(double)a; }
+fl3  operator *  (const fl3 a, const float b) { return fl3(b*a.m[0],b*a.m[1],b*a.m[2]); }
+fl3  operator *  (const GLfloat a, const fl3 b) { return b*(float)a; }
 //покомпонентное произведение
-fl3 operator ^ (const fl3 a, const fl3 b)
-{ 
-    return fl3( a.m[0]*b.m[0],
-                a.m[1]*b.m[1],
-                a.m[2]*b.m[2] ); 
-}
-float operator *  (const fl3 a, const fl3 b) 
-{ 
-    return (a.m[0]*b.m[0] + a.m[1]*b.m[1] + a.m[2]*b.m[2]); 
-}
-fl3   operator /  (const fl3 a, const double b)	
-{ 
-    return a*(1.0/b); 
-}
-fl3   operator /  (const fl3 a, const GLfloat b) 
-{ return a*(1.0/b); }
-bool  operator == (const fl3 a, const fl3 b)
-{ return a.m[0]==b.m[0]&&a.m[1]==b.m[1]&&a.m[2]==b.m[2]; }
-bool  operator &  (const fl3 a, const fl3 b) 
-{ 
-    fl3 aa = normalize(a),
-        bb = normalize(b); 
+fl3 operator ^ (const fl3 a, const fl3 b) { return fl3(a.m[0] * b.m[0], a.m[1] * b.m[1], a.m[2] * b.m[2]); }
+float operator *  (const fl3 a, const fl3 b) { return (a.m[0]*b.m[0] + a.m[1]*b.m[1] + a.m[2]*b.m[2]); }
+fl3   operator /  (const fl3 a, const GLfloat b) { return a*(1.0f/b); }
+bool  operator == (const fl3 a, const fl3 b) { return a.m[0]==b.m[0]&&a.m[1]==b.m[1]&&a.m[2]==b.m[2]; }
+bool  operator &  (const fl3 a, const fl3 b) { 
+    fl3 aa = normalize(a), bb = normalize(b); 
     return aa.m[0]==bb.m[0]&&aa.m[1]==bb.m[1]&&aa.m[2]==bb.m[2]; 
 }
-bool  operator >  (const fl3 a, const fl3 b)
-{return a.m[0]>b.m[0]&&a.m[1]>b.m[1]&&a.m[2]>b.m[2];}
+bool  operator >  (const fl3 a, const fl3 b) {return a.m[0]>b.m[0]&&a.m[1]>b.m[1]&&a.m[2]>b.m[2];}
 
 void fl3::operator += (const fl3 r)		{ *this = *this + r; }
 void fl3::operator -= (const fl3 r)		{ *this = *this - r; }
-void fl3::operator *= (const double r)	{ *this = *this * r; }
 void fl3::operator *= (const GLfloat r) { *this = *this * r; }
-void fl3::operator /= (const double r)	{ *this = *this / r; }
 void fl3::operator /= (const GLfloat r) { *this = *this / r; }
 
 fl3 ort ( fl3 v1, fl3 v2 )

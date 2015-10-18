@@ -23,9 +23,7 @@ public:
 	}
 	void operator += (const fl3 r);
 	void operator -= (const fl3 r);
-	void operator *= (const double r);
 	void operator *= (const GLfloat r);
-	void operator /= (const double r);
 	void operator /= (const GLfloat r);
 };
 
@@ -41,14 +39,11 @@ public:
 fl3   operator +  (const fl3     l, const fl3     r);
 fl3   operator -  (const fl3     a                 );
 fl3   operator -  (const fl3     l, const fl3     r);
-fl3   operator *  (const fl3     a, const double  b);
 fl3   operator *  (const fl3     a, const GLfloat b);
-fl3   operator *  (const double  a, const fl3     b);
 fl3   operator *  (const GLfloat a, const fl3     b);
 //покомпонентное произведение
 fl3   operator ^  (const fl3 a, const fl3     b);
 float operator *  (const fl3 a, const fl3     b);
-fl3   operator /  (const fl3 a, const double  b);
 fl3   operator /  (const fl3 a, const GLfloat b);
 bool  operator == (const fl3 a, const fl3     b);
 //параллельны ли
