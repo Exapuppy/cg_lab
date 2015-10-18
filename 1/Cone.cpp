@@ -1,6 +1,4 @@
 #include "Cone.h"
-#define _USE_MATH_DEFINES
-#include "math.h"
 
 CCone::CCone()
 {
@@ -35,12 +33,12 @@ CCone::CCone(float _r1, float _r2, float _h, fl3 _c)
 void CCone::create()
 {
     //for OGL drawing
-    static const float phi_end = 2*M_PI, d_phi = (2*M_PI / (float)VERTEX_NUM);
+    static const float phi_end = 2.0f*(float)M_PI, d_phi = (2.0f*(float)M_PI / (float)VERTEX_NUM);
     float phi = 0;
     for(int i = 0; phi < phi_end && i < VERTEX_NUM; phi += d_phi, i++)
     {
         float r = r1, r_end = r2, d_r = ( (r2-r1) / (float)VERTEX_NUM);
-        float hh = -h*0.5, hh_end = h*0.5, d_hh = (h / (float)VERTEX_NUM);
+        float hh = -h*0.5f, hh_end = h*0.5f, d_hh = (h / (float)VERTEX_NUM);
         for(int j = 0; hh < hh_end && j < VERTEX_NUM; r += d_r, j++, hh += d_hh)
         {
             obj[i][j] = c + (fl3(r*cos(phi),hh,r*sin(phi)));
@@ -48,7 +46,7 @@ void CCone::create()
     }
 
     //create matrix for ray tracing
-    transpose += (c - fl3(0,h*0.5,0));
+    transpose += (c - fl3(0.0f,h*0.5f,0.0f));
     float  R = max(r1,r2);
     scale *= fl3(R,h,R);
 }
@@ -92,7 +90,7 @@ bool  CCone::trace(CRay ray, float& t)
                   r = r2;//min(r1,r2);
     CRay Ray = TransferToCanonical(ray);
     SavedEyeRay = ray;
-    double Dirx = Ray._2.m[0], Diry = Ray._2.m[2], Dirz = Ray._2.m[1],
+    float Dirx = Ray._2.m[0], Diry = Ray._2.m[2], Dirz = Ray._2.m[1],
            Eyex = Ray._1.m[0], Eyey = Ray._1.m[2], Eyez = Ray._1.m[1],
 
           s = r/R, k = s-1, d = k*Dirz, f = 1 + k*Eyez,
@@ -101,11 +99,11 @@ bool  CCone::trace(CRay ray, float& t)
           B = (Eyex*Dirx + Eyey*Diry - f*d) *2,
           C = Eyex*Eyex + Eyey*Eyey - f*f;
 
-    float D = B*B - 4*A*C;
+    float D = B*B - 4.0f*A*C;
 
     if(D >= 0) //боковая поверхность
     {
-        t = (-B - sqrt(D)) / (2*A);
+        t = (-B - sqrtf(D)) / (2.0f*A);
         fl3 P = Ray.getPoint(t);
 
         if(t < 0) return false;
@@ -127,7 +125,7 @@ bool  CCone::trace(CRay ray, float& t)
     }
 
     float t1 = -Eyez/Dirz,    //нижнее основание 
-          t2 = t1 + 1.0/Dirz; //верхнее
+          t2 = t1 + 1.0f/Dirz; //верхнее
           t = min(t1,t2);
     fl3   P = Ray.getPoint(t);
 
@@ -158,7 +156,7 @@ bool  CCone::trace(CRay ray, float& t)
 
 void CCone::calculatePointColor()
 {
-    SavedColor = fl3(0.8,0.8,0.8);
+    SavedColor = fl3(0.8f,0.8f,0.8f);
 }
 void CCone::calculateIntensity(vector<CLight> Lights)
 {
@@ -184,7 +182,7 @@ fl3  CCone::calculateIntensity_Phong(fl3 a, fl3 d, fl3 s, fl3 LightPos)
     fl3 n = SavedNormal,
         cp = SavedPoint,
         S = normalize(LightPos - cp),
-        r = fl3_rotate(M_PI,n,S),
+        r = fl3_rotate((float)M_PI,n,S),
         v = normalize((SavedEyeRay._1) - cp);
     return a + d*(n*S) + s*pow((r*v),LightCoef->F);
 }

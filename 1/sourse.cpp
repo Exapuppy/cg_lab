@@ -1,4 +1,3 @@
-#pragma comment (lib, "glaux.lib")
 #include "Scene.h"
 
 
@@ -26,7 +25,7 @@ void timf(int value)
         glutTimerFunc	(20, timf, 0);
     }
 }
-void DrawXYZ (int x, int y, int z )
+void DrawXYZ (GLfloat x, GLfloat y, GLfloat z )
 {
 	glLineWidth (2);
 	glNormal3f(0,1,0);
@@ -41,7 +40,7 @@ void DrawXYZ (int x, int y, int z )
 		glVertex3f ( x, y, z );
 		glVertex3f ( x, y, z+20 );
 	glEnd ( );
-    glLineWidth (1);
+  glLineWidth (1);
 }
 void display(void)
 {

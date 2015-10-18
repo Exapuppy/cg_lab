@@ -5,7 +5,7 @@
 #include "Material.h"
 #pragma once
 
-static const fl3 BackColor = fl3(0.4,0.4,0.4);
+static const fl3 BackColor = fl3(0.4f,0.4f,0.4f);
 
 class CLight
 {

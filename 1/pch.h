@@ -6,11 +6,11 @@
 # define  _USE_MATH_DEFINES
 # include <math.h>
 # include <time.h>
+# include <vector>
+
 # include <GL/GL.h>
 # include <GL/GLU.h>
-# include "glut.h"
-# include <vector>
-//#pragma once
+# include <GL\glut.h>
 
 # define SCREEN_WIDTH	800
 # define SCREEN_HEIGHT	600

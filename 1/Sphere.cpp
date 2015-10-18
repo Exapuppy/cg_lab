@@ -1,6 +1,4 @@
 #include "Sphere.h"
-#define _USE_MATH_DEFINES
-#include "math.h"
 
 CSphere::CSphere() : r(0)
 {
