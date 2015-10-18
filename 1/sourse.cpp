@@ -25,6 +25,7 @@ void timf(int value)
     glutTimerFunc(20, timf, 0);
   }
 }
+
 void DrawXYZ(GLfloat x, GLfloat y, GLfloat z)
 {
   glLineWidth(2);
