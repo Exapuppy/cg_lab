@@ -108,8 +108,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="scene.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
